@@ -1,1 +1,77 @@
+// Matrix Diagonal Sum 
 
+class Solution {
+    public int diagonalSum(int[][] mat) {
+        int n=mat.length;
+        int result=0;
+        for(int i=0;i<n;i++){
+          result+=mat[i][i];
+          result+=mat[i][n-i-1];
+        }
+        if(n%2==1){
+            result-=mat[n/2][n/2];
+        }
+        return result;
+        
+    }
+}
+// Reshape the Matrix
+
+class Solution {
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        int n=mat.length;
+        int m=mat[0].length;
+        int result[][]=new int[r][c];
+        if(r*c!=n*m){
+            return mat;
+        }
+        for(int j=0;j<n*m;j++){
+            result[j/c][j%c]=mat[j/m][j%m];
+        }
+        return result;
+        
+    }
+}
+
+
+
+
+//  Spiral Matrix
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int columnbegin=0;
+        int columnend=matrix[0].length-1;
+        int rowbegin=0;
+        int rowend=matrix.length-1;
+        List<Integer> list = new ArrayList<>();
+        while(columnbegin <=columnend && rowbegin <=rowend){
+            for(int i=columnbegin;i<=columnend;i++){
+                list.add(matrix[rowbegin][i]);
+            }
+             rowbegin++;
+            
+            for(int j=rowbegin;j<=rowend;j++){
+                list.add(matrix[j][columnend]);
+            }
+                columnend--;
+            
+             if(rowbegin <= rowend) {
+                 for(int k= columnend;k>=columnbegin;k--){
+                list.add(matrix[rowend][k]);
+                 }
+                rowend--;
+            
+            }
+            if(columnbegin<=columnend){
+
+            
+            for(int l=rowend;l>=rowbegin;l--){
+                list.add(matrix[l][columnbegin]);
+            }
+            columnbegin++;
+            }
+        }
+   return list;     
+    }
+}
