@@ -1,1 +1,68 @@
+  // Ransom Note
+public class RansomNote {
 
+  boolean canConstruct(String ransomNote, String magazine) {
+    int[] charCount = new int[26];
+    for (char c : magazine.toCharArray()) {
+      charCount[c - 'a']++;
+    }
+    for (char c : ransomNote.toCharArray()) {
+      if (charCount[c - 'a'] == 0) {
+        return false; 
+      }
+      charCount[c - 'a']--;
+    }
+    return true;
+  }
+
+}
+// First Unique Character in a String 
+
+class Solution {
+    public int firstUniqChar(String str) {
+
+        int index = -1;
+
+        Map<Character, Integer> charFreqMap = new HashMap<>();
+
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+
+            int freq = charFreqMap.getOrDefault(c, 0);
+
+            charFreqMap.put(c, freq + 1);
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (charFreqMap.get(str.charAt(i)) == 1) {
+                index = i;
+                break;
+            }
+        }
+
+        return index;
+    }
+}
+
+// Valid Anagram
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        s=s.toLowerCase();
+        t=t.toLowerCase();
+        s=s.replace(" ","");
+        t=t.replace(" ","");
+        int count[]=new int[26];
+        for(int i=0;i<s.length();i++){
+         count[s.charAt(i)-'a']++;
+        }
+        for(int i=0;i<t.length();i++){
+           count[t.charAt(i)-'a']--;
+        }
+        for(int num:count){
+            if(num!=0){
+                return false;
+
+            }
+        }
+        return true;
+    }
+}
