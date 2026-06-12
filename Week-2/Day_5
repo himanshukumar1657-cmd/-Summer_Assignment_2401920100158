@@ -1,1 +1,94 @@
+//  Group Anagrams 
 
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if(strs.length==0 || strs ==null){
+            return new ArrayList<>();
+        }
+        HashMap<String,List<String>> fremap=new HashMap<>();
+        for(String str:strs){
+    String frequencyString = getFrequencyString(str);
+
+        
+        if(fremap.containsKey(frequencyString)) {
+         
+         fremap.get( frequencyString ).add(str);
+        }
+        else{
+            List<String>strList=new ArrayList<>();
+            strList.add(str);
+             fremap.put( frequencyString,strList );
+
+        }
+       
+    }
+  
+   return new ArrayList<>(fremap.values());
+
+   }
+    private String getFrequencyString(String str){
+        int [] freq=new int [26];
+        for(char c:str.toCharArray()){
+            freq[c-'a']++;
+        }
+        StringBuilder frequencyString=new StringBuilder("");  
+        char c='a';
+        for(int i:freq){
+        frequencyString.append(c);
+        frequencyString.append(i);
+        c++;
+        }
+        return frequencyString.toString();
+
+    }
+
+
+}
+
+// Longest Palindromic Substring 
+
+class Solution {
+  public String longestPalindrome(String s) {
+     if (s.length() == 1)
+      return s;
+
+    String lonStrs="";
+    for (int i=1;i<s.length();i++){
+
+      int low =i;
+      int high=i;
+      while(s.charAt(low)==s.charAt(high)){
+          low--;
+          high++;
+          if(low==-1  || high==s.length()){
+        break;
+      }
+      
+      }
+      String str=s.substring(low+1,high);
+      if(str.length()>lonStrs.length()){
+      lonStrs=str;
+      }
+      
+    
+    
+    low=i-1;
+    high=i;
+    while(s.charAt(low)==s.charAt(high)){
+        low--;
+        high++;
+        if(low==- 1 || high==s.length()){
+        break;
+        }
+    }
+    
+           str=s.substring(low+1,high);
+     
+    if(str.length()>lonStrs.length()){
+      lonStrs=str;
+      }
+    }
+     
+      return lonStrs;
+}
+}
