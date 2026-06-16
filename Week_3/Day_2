@@ -1,1 +1,121 @@
+// Merge Two Sorted Lists 
 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode temp1=list1;
+        ListNode temp2=list2;
+        ListNode temp=new ListNode(100);
+         ListNode t=temp;
+        while(temp1!=null && temp2!=null){
+            if(temp1.val<temp2.val){
+             t.next=temp1;
+             t=temp1;
+             temp1=temp1.next;
+            }
+            else{
+                t.next=temp2;
+             t=temp2;
+             temp2=temp2.next; 
+        }
+        
+    }
+    if(temp1==null){
+        t.next=temp2;
+    }
+    else{
+        t.next=temp1;
+    }
+    return temp.next;
+}
+}
+// Remove Nth Node From End of List
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode fast=head;
+        ListNode slow=head;
+        for(int i=1;i<=n;i++){
+            fast=fast.next;
+        }
+        if(fast==null){
+            head=head.next;
+            return head;
+        }
+        while(fast.next!=null){
+            fast=fast.next;
+            slow=slow.next;
+        
+        }
+        slow.next=slow.next.next;
+         return head;
+        
+    }
+}
+
+package leetcode.easy;
+
+import util.ListNode;
+
+/**
+ * Created by nikoo28 on 2019-07-20 22:26
+ */
+// Palindrome Linked List 
+
+class PalindromeLinkedList {
+
+  boolean isPalindrome(ListNode head) {
+
+    ListNode fast = head, slow = head;
+    while (fast != null && fast.next != null) {
+      fast = fast.next.next;
+      slow = slow.next;
+    }
+    if (fast != null) { 
+      slow = slow.next;
+    }
+
+    slow = reverseList(slow);
+    fast = head;
+
+    while (slow != null) {
+      if (fast.val != slow.val)
+        return false;
+
+      fast = fast.next;
+      slow = slow.next;
+    }
+    return true;
+  }
+
+  private ListNode reverseList(ListNode head) {
+    ListNode prev = null;
+    while (head != null) {
+      ListNode next = head.next;
+      head.next = prev;
+      prev = head;
+      head = next;
+    }
+    return prev;
+  }
+
+}
